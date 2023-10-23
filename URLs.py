@@ -1,6 +1,3 @@
-CDN = "http://cdn.tsetmc.com/api"
-
-
 LAST_POSSIBLE_DAY = "http://service.tsetmc.com/tsev2/data/TseClient2.aspx?t=LastPossibleDeven"
 """Response would be like:
 20231022;20231022
