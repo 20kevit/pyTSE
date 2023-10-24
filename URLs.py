@@ -14,6 +14,9 @@ GET_STATIC_DATA = "http://cdn.tsetmc.com/api/StaticData/GetStaticData"
 ALL_TICKERS = "http://old.tsetmc.com/Loader.aspx?ParTree=111C1417"
 #Response in an HTML
 
+SEARCH = "http://old.tsetmc.com/tsev2/data/search.aspx?skey={key}"
+#response may contains several results but the best one is the first one
+
 TICKER_INSTRUMENT_INFO = "http://cdn.tsetmc.com/api/Instrument/GetInstrumentInfo/{insCode}"
 """Response would be like:
 {
