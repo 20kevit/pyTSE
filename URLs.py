@@ -72,9 +72,9 @@ TICKER_INSTRUMENT_INFO = "http://cdn.tsetmc.com/api/Instrument/GetInstrumentInfo
 }
 """
 
-#---------- اطلاعیه -----------
-GET_PREPARED_DATA ="http://cdn.tsetmc.com/api/Codal/GetPreparedData/{n}"
-GET_PREPARED_DATA_BY_INSCODE ="http://cdn.tsetmc.com/api/Codal/GetPreparedDataByInsCode/{n}/{insCode}"
+# ---------- اطلاعیه -----------
+GET_PREPARED_DATA = "http://cdn.tsetmc.com/api/Codal/GetPreparedData/{n}"
+GET_PREPARED_DATA_BY_INSCODE = "http://cdn.tsetmc.com/api/Codal/GetPreparedDataByInsCode/{n}/{insCode}"
 """Response would be like:
 {
     "preparedData": [
@@ -102,7 +102,7 @@ GET_PREPARED_DATA_BY_INSCODE ="http://cdn.tsetmc.com/api/Codal/GetPreparedDataBy
 }
 """
 
-CLOSING_PRICE_DAILY_LIST ="http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceDailyList/{insCode}/{n}"
+CLOSING_PRICE_DAILY_LIST = "http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceDailyList/{insCode}/{n}"
 """Response would be like:
 {
     "closingPriceDaily": [
@@ -129,8 +129,8 @@ CLOSING_PRICE_DAILY_LIST ="http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPric
     ]
 }
 """
-GET_MESSAGE_BY_INSCODE ="http://cdn.tsetmc.com/api/Msg/GetMsgByInsCode/{insCode}"
-GET_MESSAGE_BY_FLOW ="http://cdn.tsetmc.com/api/Msg/GetMsgByFlow/{flow}/{n}"
+GET_MESSAGE_BY_INSCODE = "http://cdn.tsetmc.com/api/Msg/GetMsgByInsCode/{insCode}"
+GET_MESSAGE_BY_FLOW = "http://cdn.tsetmc.com/api/Msg/GetMsgByFlow/{flow}/{n}"
 """Response would be like:
 {
     "msg":[
@@ -146,8 +146,8 @@ GET_MESSAGE_BY_FLOW ="http://cdn.tsetmc.com/api/Msg/GetMsgByFlow/{flow}/{n}"
     ]
 }"""
 
-ALL_INSTRUMENT_STATE_CHANGES ="http://cdn.tsetmc.com/api/MarketData/GetInstrumentStateAll/{insCode}"
-TOP_INSTRUMENT_STATE_CHANGES ="http://cdn.tsetmc.com/api/MarketData/GetInstrumentStateTop/{n}"
+ALL_INSTRUMENT_STATE_CHANGES = "http://cdn.tsetmc.com/api/MarketData/GetInstrumentStateAll/{insCode}"
+TOP_INSTRUMENT_STATE_CHANGES = "http://cdn.tsetmc.com/api/MarketData/GetInstrumentStateTop/{n}"
 """Response would be like:
 {
     "instrumentState": [
@@ -168,7 +168,7 @@ TOP_INSTRUMENT_STATE_CHANGES ="http://cdn.tsetmc.com/api/MarketData/GetInstrumen
 }
 """
 
-GET_CLOSING_PRICE_INFO ="http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceInfo/{insCode}"
+GET_CLOSING_PRICE_INFO = "http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceInfo/{insCode}"
 """Response would be like:
 {
     "closingPriceInfo": {
@@ -209,7 +209,7 @@ GET_CLOSING_PRICE_INFO ="http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceI
 }
 """
 
-BEST_LIMITS ="http://cdn.tsetmc.com/api/BestLimits/{insCode}"
+BEST_LIMITS = "http://cdn.tsetmc.com/api/BestLimits/{insCode}"
 """Response would be like:
 {
     "bestLimits": [
@@ -267,7 +267,7 @@ BEST_LIMITS ="http://cdn.tsetmc.com/api/BestLimits/{insCode}"
 }
 """
 
-GET_CLIENT_TYPE_HISTORY ="http://cdn.tsetmc.com/api/ClientType/GetClientTypeHistory/{insCode}"
+GET_CLIENT_TYPE_HISTORY = "http://cdn.tsetmc.com/api/ClientType/GetClientTypeHistory/{insCode}"
 """
 {
     "clientType": [
@@ -291,7 +291,7 @@ GET_CLIENT_TYPE_HISTORY ="http://cdn.tsetmc.com/api/ClientType/GetClientTypeHist
     ]
 }
 """
-CLIENT_TYPE ="http://cdn.tsetmc.com/api/ClientType/GetClientType/{insCode}/1/0"
+CLIENT_TYPE = "http://cdn.tsetmc.com/api/ClientType/GetClientType/{insCode}/1/0"
 """Response would be like:
 {
     "clientType": {
@@ -309,7 +309,7 @@ CLIENT_TYPE ="http://cdn.tsetmc.com/api/ClientType/GetClientType/{insCode}/1/0"
 }
 """
 
-GET_TRADE ="http://cdn.tsetmc.com/api/Trade/GetTrade/{insCode}"
+GET_TRADE = "http://cdn.tsetmc.com/api/Trade/GetTrade/{insCode}"
 """Response would be like:
 {
     "trade": [
@@ -333,7 +333,7 @@ GET_TRADE ="http://cdn.tsetmc.com/api/Trade/GetTrade/{insCode}"
 }
 """
 
-GET_RELATED_COMPANY_LAST_30_DAYS ="http://cdn.tsetmc.com/api/ClosingPrice/GetRelatedCompany/{group_code}"
+GET_RELATED_COMPANY_LAST_30_DAYS = "http://cdn.tsetmc.com/api/ClosingPrice/GetRelatedCompany/{group_code}"
 """Response would be like:
 {
     "relatedCompany": [
@@ -395,7 +395,8 @@ GET_RELATED_COMPANY_LAST_30_DAYS ="http://cdn.tsetmc.com/api/ClosingPrice/GetRel
 #                        "http://cdn.tsetmc.com/api/Codal/GetStatementContentByInsCode/6/6/0/{insCode}" #ترازنامه
 #                        "http://cdn.tsetmc.com/api/Codal/GetStatementContentByInsCode/12/0/-1/{insCode} #هیات مدیره
 #                        "http://cdn.tsetmc.com/api/Codal/GetStatementContentByInsCode/13/0/-1/{insCode}" #آکهی مجمع
-GET_STATEMENT_BY_INSCODE ="http://cdn.tsetmc.com/api/Codal/GetStatementContentByInsCode/6/8/-1/{insCode}" #پورتفوی
+# پورتفوی
+GET_STATEMENT_BY_INSCODE = "http://cdn.tsetmc.com/api/Codal/GetStatementContentByInsCode/6/8/-1/{insCode}"
 """Response would be like:
 {
     "statemetnContent": [
@@ -414,7 +415,7 @@ GET_STATEMENT_BY_INSCODE ="http://cdn.tsetmc.com/api/Codal/GetStatementContentBy
 """
 
 
-GET_INSTRUMENT_STATISTICS ="http://cdn.tsetmc.com/api/MarketData/GetInstrumentStatistic/{insCode}"
+GET_INSTRUMENT_STATISTICS = "http://cdn.tsetmc.com/api/MarketData/GetInstrumentStatistic/{insCode}"
 """Response would be like:
 {
     "instrumentStatistic": [
@@ -432,7 +433,7 @@ GET_INSTRUMENT_STATISTICS ="http://cdn.tsetmc.com/api/MarketData/GetInstrumentSt
 """
 
 
-GET_INSTRUMENT_IDENTITY ="http://cdn.tsetmc.com/api/Instrument/GetInstrumentIdentity/{insCode}"
+GET_INSTRUMENT_IDENTITY = "http://cdn.tsetmc.com/api/Instrument/GetInstrumentIdentity/{insCode}"
 """Response would be like:
 {
     "instrumentIdentity": {
@@ -471,7 +472,7 @@ GET_INSTRUMENT_IDENTITY ="http://cdn.tsetmc.com/api/Instrument/GetInstrumentIden
 }
 """
 
-GET_INSTRUMENT_SHARE_HOLDERS ="http://cdn.tsetmc.com/api/Shareholder/GetInstrumentShareHolderLast/{insCode}"
+GET_INSTRUMENT_SHARE_HOLDERS = "http://cdn.tsetmc.com/api/Shareholder/GetInstrumentShareHolderLast/{insCode}"
 """Response would be like:
 {
     "shareHolder": [
@@ -490,8 +491,8 @@ GET_INSTRUMENT_SHARE_HOLDERS ="http://cdn.tsetmc.com/api/Shareholder/GetInstrume
     ]
 }
 """
-#---------- معرفی ----------
-GET_CODAL_PUBLISHER_BY_SYMBOL ="http://cdn.tsetmc.com/api/Codal/GetCodalPublisherBySymbol/{symbol}"
+# ---------- معرفی ----------
+GET_CODAL_PUBLISHER_BY_SYMBOL = "http://cdn.tsetmc.com/api/Codal/GetCodalPublisherBySymbol/{symbol}"
 """Response would be like:
 {
     "codalPublisher": {
