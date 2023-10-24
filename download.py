@@ -79,3 +79,11 @@ def instrument_info(insCode:int|str):
         "sector_pe" : data["eps"]["sectorPE"],
         "PSR" : data["eps"]["psr"]
     }
+    
+def all_tickers():
+    url = URLs.ALL_TICKERS
+    response = get(url)
+    data = pd.read_html(response.text)[0]
+    data.drop(0, axis='index', inplace=True)
+    data.columns = ["ISIN", "group", "sector", "table", "eng_symbol", "eng_name", "symbol", "name"]
+    return data
