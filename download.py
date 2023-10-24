@@ -8,7 +8,16 @@ def get(url):
         url = url,
         headers = {"User-Agent" : USER_AGENT}
     )
-
+def search(search_key:str) -> list:
+    """first item is the best match"""
+    url = URLs.SEARCH.format(key=search_key)
+    response = get(url)
+    if not response.text:
+        return list()
+    results = response.text.split(";")[:-1]
+    data = pd.DataFrame([result.split(',')[:3] for result in results])
+    data.columns = ["symbol", "name", "insCode"]
+    return data
 def history(insCode:int|str, days:int=0) -> pd.DataFrame:
     days = 0 if days < 0 else days
     url = URLs.CLOSING_PRICE_DAILY_LIST.format(
