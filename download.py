@@ -42,3 +42,40 @@ def history(insCode:int|str, days:int=0) -> pd.DataFrame:
     data = data.astype(dtype='int64')
 
     return data
+
+def instrument_info(insCode:int|str):
+    url = URLs.TICKER_INSTRUMENT_INFO.format(insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["instrumentInfo"]
+    print(data["kAjCapValCpsIdx"])
+    return {
+        "date" : data["dEven"],
+        "daily_threshold" : (
+            int(data["staticThreshold"]["psGelStaMin"]),
+            int(data["staticThreshold"]["psGelStaMin"])
+            ),
+        "weekly_range" : (
+            int(data["minWeek"]),
+            int(data["maxWeek"])
+        ),
+        "yearly_range" : (
+            int(data["minYear"]),
+            int(data["maxYear"])            
+        ),
+        "month_average_volume" : data["qTotTran5JAvg"],
+        "symbol" : data["lVal18AFC"],
+        "persian_name" : data["lVal30"],
+        "english_name" : data["lVal18"],
+        "instrument_id" : data["instrumentID"],
+        "ISIN" : data["cIsin"],
+        "number_of_shares" : int(data["zTitad"]),
+        "base_vloume" : data["baseVol"],
+        "flow_code" : data["flow"],
+        "ُsector_code" : int(data["sector"]["cSecVal"]),
+        "sector_name" : data["sector"]["lSecVal"],
+        "EPS" : data["eps"]["epsValue"] or data["eps"]["estimatedEPS"],
+        "sector_pe" : data["eps"]["sectorPE"],
+        "PSR" : data["eps"]["psr"]
+    }
