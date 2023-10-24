@@ -8,8 +8,11 @@ TICKER_OLD_PAGE = "http://old.tsetmc.com/Loader.aspx?ParTree=151311&i={insCode}"
 TICKER_NEW_PAGE = "http://www.tsetmc.com/instInfo/{insCode}"
 TICKER_INSTRUMENT_INFO_FAST = "http://old.tsetmc.com/tsev2/data/instinfofast.aspx?i={insCode}&c=1"
 GROUP_TICKER = "http://old.tsetmc.com/tsev2/data/InstValue.aspx?g={}&t=g&s={insCode}"
-INDEX_COMPANY ="http://cdn.tsetmc.com/api/ClosingPrice/GetIndexCompany/{insCode}"
-GET_STATIC_DATA ="http://cdn.tsetmc.com/api/StaticData/GetStaticData"
+INDEX_COMPANY = "http://cdn.tsetmc.com/api/ClosingPrice/GetIndexCompany/{insCode}"
+GET_STATIC_DATA = "http://cdn.tsetmc.com/api/StaticData/GetStaticData"
+
+ALL_TICKERS = "http://old.tsetmc.com/Loader.aspx?ParTree=111C1417"
+#Response in an HTML
 
 TICKER_INSTRUMENT_INFO = "http://cdn.tsetmc.com/api/Instrument/GetInstrumentInfo/{insCode}"
 """Response would be like:
