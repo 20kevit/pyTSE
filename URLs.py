@@ -11,7 +11,7 @@ GROUP_TICKER = "http://old.tsetmc.com/tsev2/data/InstValue.aspx?g={}&t=g&s={insC
 INDEX_COMPANY ="http://cdn.tsetmc.com/api/ClosingPrice/GetIndexCompany/{insCode}"
 GET_STATIC_DATA ="http://cdn.tsetmc.com/api/StaticData/GetStaticData"
 
-TICKER_INSTRUMENT_INFO ="http://cdn.tsetmc.com/api/Instrument/GetInstrumentInfo/{insCode}"
+TICKER_INSTRUMENT_INFO = "http://cdn.tsetmc.com/api/Instrument/GetInstrumentInfo/{insCode}"
 """Response would be like:
 {
     "instrumentInfo": {
