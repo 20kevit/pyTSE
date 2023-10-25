@@ -116,3 +116,14 @@ def all_tickers():
     data.drop(0, axis='index', inplace=True)
     data.columns = ["ISIN", "group", "sector", "table", "eng_symbol", "eng_name", "symbol", "name"]
     return data
+
+def codal_announcement(days:int):
+    url = URLs.GET_PREPARED_DATA.format(n=days)
+    response = get(url)
+    print(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["preparedData"]
+    data = pd.DataFrame(data)
+    data = data.set_index("id")
+    return data
