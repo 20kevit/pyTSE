@@ -60,7 +60,6 @@ def instrument_info(insCode:int|str):
     if response.status_code != 200:
         return None
     data = response.json()["instrumentInfo"]
-    return data["nav"]
     return {
         "date" : data["dEven"],
         "daily_threshold" : (
