@@ -8,6 +8,7 @@ def get(url):
         url = url,
         headers = {"User-Agent" : USER_AGENT}
     )
+
 def search(search_key:str) -> list:
     """first item is the best match"""
     url = URLs.SEARCH.format(key=search_key)
@@ -18,6 +19,7 @@ def search(search_key:str) -> list:
     data = pd.DataFrame([result.split(',')[:3] for result in results])
     data.columns = ["symbol", "name", "insCode"]
     return data
+
 def history(insCode:int|str, days:int=0) -> pd.DataFrame:
     days = 0 if days < 0 else days
     url = URLs.CLOSING_PRICE_DAILY_LIST.format(
@@ -53,12 +55,12 @@ def history(insCode:int|str, days:int=0) -> pd.DataFrame:
     return data
 
 def instrument_info(insCode:int|str):
-    url = URLs.TICKER_INSTRUMENT_INFO.format(insCode)
+    url = URLs.TICKER_INSTRUMENT_INFO.format(insCode=insCode)
     response = get(url)
     if response.status_code != 200:
         return None
     data = response.json()["instrumentInfo"]
-    print(data["kAjCapValCpsIdx"])
+    return data["nav"]
     return {
         "date" : data["dEven"],
         "daily_threshold" : (
@@ -82,12 +84,31 @@ def instrument_info(insCode:int|str):
         "number_of_shares" : int(data["zTitad"]),
         "base_vloume" : data["baseVol"],
         "flow_code" : data["flow"],
+        "flow_title" : data["flowTitle"],
         "ُsector_code" : int(data["sector"]["cSecVal"]),
         "sector_name" : data["sector"]["lSecVal"],
         "EPS" : data["eps"]["epsValue"] or data["eps"]["estimatedEPS"],
         "sector_pe" : data["eps"]["sectorPE"],
-        "PSR" : data["eps"]["psr"]
+        "PSR" : data["eps"]["psr"],
+        "free_float" : data["kAjCapValCpsIdx"],
+        "group" : data["cgrValCot"],
+        "group_title" : data["cgrValCotTitle"],
+        "y_value" : data["yVal"],
+        "nav" : data["nav"]
     }
+"""y_value:
+263: سبد قابل معامله در بورس
+300: سهام
+301: اوراق مشارکت
+302: سبد مشاع
+303: اتیسی
+304: آتی
+306: اوراق مشارکت اتیسی
+248: گواهي خريد سهام
+068: شاخص
+400: حق تقدم سهم
+403: حق تقدم اتیسی
+500: جايزه سهم"""
     
 def all_tickers():
     url = URLs.ALL_TICKERS
