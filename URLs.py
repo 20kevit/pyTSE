@@ -77,7 +77,6 @@ TICKER_INSTRUMENT_INFO = "http://cdn.tsetmc.com/api/Instrument/GetInstrumentInfo
 
 # ---------- اطلاعیه -----------
 GET_PREPARED_DATA = "http://cdn.tsetmc.com/api/Codal/GetPreparedData/{n}"
-GET_PREPARED_DATA_BY_INSCODE = "http://cdn.tsetmc.com/api/Codal/GetPreparedDataByInsCode/{n}/{insCode}"
 """Response would be like:
 {
     "preparedData": [
