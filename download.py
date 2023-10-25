@@ -1,6 +1,7 @@
 import requests 
 import pandas as pd
 import URLs
+from datetime import datetime
 
 USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36"
 def get(url):
@@ -126,4 +127,24 @@ def codal_announcement(days:int):
     data = response.json()["preparedData"]
     data = pd.DataFrame(data)
     data = data.set_index("id")
+    return data
+
+def supervisor_message_by_insCode(insCode:int|str):
+    url = URLs.GET_MESSAGE_BY_INSCODE.format(insCode=insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["msg"]
+    data = pd.DataFrame(data)
+    data.rename(
+        columns={
+        "tseMsgIdn" : "id",
+        "dEven" : "date",
+        "hEven" : "time",
+        "tseTitle" : "title",
+        "tseDesc" : "description"
+        },
+        inplace=True
+    )
+    data.set_index("id", inplace=True)
     return data
