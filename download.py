@@ -227,3 +227,33 @@ def closing_price_info(insCode: int | str):
         "volume": int(data["qTotTran5J"]),
         "value": int(data["qTotCap"])
     }
+
+def best_limits(insCode: int | str):
+    url = URLs.BEST_LIMITS.format(insCode=insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["bestLimits"]
+    data = pd.DataFrame(data)
+    asks = data[["zOrdMeDem", "qTitMeDem", "pMeDem"]].astype(int)
+    bids = data[["zOrdMeOf", "qTitMeOf", "pMeOf"]].astype(int)
+    asks.rename(
+        columns={
+            "zOrdMeDem": "number",
+            "qTitMeDem": "volume",
+            "pMeDem": "price"
+        },
+        inplace=True
+    )
+    bids.rename(
+        columns={
+            "zOrdMeOf": "number",
+            "qTitMeOf": "volume",
+            "pMeOf": "price"
+        },
+        inplace=True
+    )
+    return {
+        "Asks": asks,
+        "Bids": bids
+    }
