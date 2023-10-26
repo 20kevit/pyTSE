@@ -141,7 +141,8 @@ def codal_announcement(days: int):
     return data
 
 
-def _supervisor_message(response):
+def _supervisor_message(url):
+    response = get(url)
     if response.status_code != 200:
         return None
     data = response.json()["msg"]
@@ -165,43 +166,11 @@ def _supervisor_message(response):
 
 def supervisor_message_by_insCode(insCode: int | str):
     url = URLs.GET_MESSAGE_BY_INSCODE.format(insCode=insCode)
-    response = get(url)
-    if response.status_code != 200:
-        return None
-    data = response.json()["msg"]
-    data = pd.DataFrame(data)
-    data.rename(
-        columns={
-            "tseMsgIdn": "id",
-            "dEven": "date",
-            "hEven": "time",
-            "tseTitle": "title",
-            "tseDesc": "description"
-        },
-        inplace=True
-    )
-    data.set_index("id", inplace=True)
-    return data
+    return _supervisor_message(url)
 
 
 def supervisor_message_by_flow(flow: int, n: int = 10):
     if not 0 <= flow <= 4:
         return None
     url = URLs.GET_MESSAGE_BY_FLOW.format(flow=flow, n=n)
-    response = get(url)
-    if response.status_code != 200:
-        return None
-    data = response.json()["msg"]
-    data = pd.DataFrame(data)
-    data.rename(
-        columns={
-            "tseMsgIdn": "id",
-            "dEven": "date",
-            "hEven": "time",
-            "tseTitle": "title",
-            "tseDesc": "description"
-        },
-        inplace=True
-    )
-    data.set_index("id", inplace=True)
-    return data
+    return _supervisor_message(url)
