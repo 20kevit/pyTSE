@@ -141,6 +141,26 @@ def codal_announcement(days: int):
     return data
 
 
+def _supervisor_message(response):
+    if response.status_code != 200:
+        return None
+    data = response.json()["msg"]
+    data = pd.DataFrame(data)
+    data.rename(
+        columns={
+            "tseMsgIdn": "id",
+            "dEven": "date",
+            "hEven": "time",
+            "tseTitle": "title",
+            "tseDesc": "description"
+        },
+        inplace=True
+    )
+    data.set_index("id", inplace=True)
+    return data
+
+    
+
 def supervisor_message_by_insCode(insCode: int | str):
     url = URLs.GET_MESSAGE_BY_INSCODE.format(insCode=insCode)
     response = get(url)
