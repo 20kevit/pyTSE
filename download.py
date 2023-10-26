@@ -145,6 +145,8 @@ def _supervisor_message(response):
     if response.status_code != 200:
         return None
     data = response.json()["msg"]
+    if not data:
+        return pd.DataFrame()
     data = pd.DataFrame(data)
     data.rename(
         columns={
