@@ -204,3 +204,26 @@ def instrument_state_changes(n=10, insCode=None):
     )
     data.set_index("id", inplace=True)
     return data
+
+
+def closing_price_info(insCode: int | str):
+    url = URLs.GET_CLOSING_PRICE_INFO.format(insCode=insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["closingPriceInfo"]
+    return {
+        "status": data["instrumentState"]["cEtaval"],
+        "status_title": data["instrumentState"]["cEtavalTitle"],
+        "last_update_time": data["lastHEven"],
+        "last_update_date": data["finalLastDate"],
+        "low": int(data["priceMin"]),
+        "high": int(data["priceMax"]),
+        "close": int(data["pClosing"]),
+        "yesterday": int(data["priceYesterday"]),
+        "first": int(data["priceFirst"]),
+        "last": int(data["pDrCotVal"]),
+        "number" : int(data["zTotTran"]),
+        "volume": int(data["qTotTran5J"]),
+        "value": int(data["qTotCap"])
+    }
