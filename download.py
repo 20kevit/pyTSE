@@ -162,7 +162,6 @@ def _supervisor_message(url):
     data.set_index("id", inplace=True)
     return data
 
-    
 
 def supervisor_message_by_insCode(insCode: int | str):
     url = URLs.GET_MESSAGE_BY_INSCODE.format(insCode=insCode)
@@ -174,3 +173,34 @@ def supervisor_message_by_flow(flow: int, n: int = 10):
         return None
     url = URLs.GET_MESSAGE_BY_FLOW.format(flow=flow, n=n)
     return _supervisor_message(url)
+
+
+def instrument_state_changes(n=10, insCode=None):
+    """n will be ignored if insCode is declared"""
+    if insCode:
+        url = URLs.ALL_INSTRUMENT_STATE_CHANGES.format(insCode=insCode)
+    else:
+        url = URLs.TOP_INSTRUMENT_STATE_CHANGES.format(n=n)
+
+    response = get(url)
+    data = response.json()["instrumentState"]
+    data = pd.DataFrame(data)
+    data.rename(
+        columns={
+            "idn": "id",
+            "dEven": "date",
+            "hEven": "time",
+            "insCode": "insCode",
+            "lVal18AFC": "symbol",
+            "lVal30": "name",
+            "cEtaval": "status",
+            "cEtavalTitle": "status_title"
+        },
+        inplace=True
+    )
+    data.drop(
+        columns=["realHeven", "underSupervision"],
+        inplace=True
+    )
+    data.set_index("id", inplace=True)
+    return data
