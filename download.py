@@ -289,4 +289,29 @@ def client_type_history(insCode: int | str):
     data.set_index("date", inplace=True)
     data = data.astype("Int64")
     return data
-    
+
+
+def trades(insCode: int | str):
+    url = URLs.GET_TRADE.format(insCode=insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["trade"]
+    data = pd.DataFrame(data)
+    data.drop(
+        columns=[
+            "insCode", "dEven","nTran", "qTitNgJ", "iSensVarP", "pPhSeaCotJ", "pPbSeaCotJ", "iAnuTran", "xqVarPJDrPRf"
+        ],
+        inplace=True
+    )
+    data.rename(
+        columns={
+            "hEven": "time",
+            "qTitTran": "volume",
+            "pTran": "price"
+        },
+        inplace=True
+    )
+    data["price"] = data["price"].astype(int)
+    data["canceled"] = data["canceled"].astype(bool)
+    return data
