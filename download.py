@@ -228,6 +228,7 @@ def closing_price_info(insCode: int | str):
         "value": int(data["qTotCap"])
     }
 
+
 def best_limits(insCode: int | str):
     url = URLs.BEST_LIMITS.format(insCode=insCode)
     response = get(url)
@@ -257,3 +258,35 @@ def best_limits(insCode: int | str):
         "Asks": asks,
         "Bids": bids
     }
+    
+
+def client_type_history(insCode: int | str):
+    url = URLs.GET_CLIENT_TYPE_HISTORY.format(insCode=insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["clientType"]
+    data = pd.DataFrame(data)
+    data.drop(columns=["insCode"], inplace=True)
+    data.rename(
+        columns={
+            "recDate": "date",
+            "buy_I_Count": "individual_buy_count",
+            "buy_I_Volume": "individual_buy_volume",
+            "buy_I_Value": "individual_buy_value",
+            "sell_I_Count": "individual_sell_count",
+            "sell_I_Volume": "individual_sell_volume",
+            "sell_I_Value": "individual_sell_value",
+            "buy_N_Count": "juridical_buy_count",
+            "buy_N_Volume": "juridical_buy_volume",
+            "buy_N_Value": "juridical_buy_value",
+            "sell_N_Count": "juridical_sell_count",
+            "sell_N_Volume": "juridical_sell_volume",
+            "sell_N_Value": "juridical_sell_value",
+        },
+        inplace=True
+    )
+    data.set_index("date", inplace=True)
+    data = data.astype("Int64")
+    return data
+    
