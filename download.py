@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import URLs
-from datetime import datetime
+from tools import *
 
 USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36"
 
@@ -55,6 +55,7 @@ def history(insCode: int | str, days: int = 0) -> pd.DataFrame:
         },
         inplace=True
     )
+    data["date"] = data["date"].apply(dEven_to_date)
     data.set_index('date', inplace=True)
     data = data.astype(dtype='int64')
 
@@ -68,7 +69,7 @@ def instrument_info(insCode: int | str):
         return None
     data = response.json()["instrumentInfo"]
     return {
-        "date": data["dEven"],
+        "date": dEven_to_date(data["dEven"]),
         "daily_threshold": (
             int(data["staticThreshold"]["psGelStaMin"]),
             int(data["staticThreshold"]["psGelStaMin"])
@@ -159,6 +160,7 @@ def _supervisor_message(url):
         },
         inplace=True
     )
+    data["date"] = data["date"].apply(dEven_to_date)
     data.set_index("id", inplace=True)
     return data
 
@@ -175,7 +177,7 @@ def supervisor_message_by_flow(flow: int, n: int = 10):
     return _supervisor_message(url)
 
 
-def instrument_state_changes(n=10, insCode=None):
+def instrument_state_changes(insCode=None, n=10):
     """n will be ignored if insCode is declared"""
     if insCode:
         url = URLs.ALL_INSTRUMENT_STATE_CHANGES.format(insCode=insCode)
@@ -202,6 +204,7 @@ def instrument_state_changes(n=10, insCode=None):
         columns=["realHeven", "underSupervision"],
         inplace=True
     )
+    data["date"] = data["date"].apply(dEven_to_date)
     data.set_index("id", inplace=True)
     return data
 
@@ -286,6 +289,7 @@ def client_type_history(insCode: int | str):
         },
         inplace=True
     )
+    data["date"] = data["date"].apply(dEven_to_date)
     data.set_index("date", inplace=True)
     data = data.astype("Int64")
     return data
