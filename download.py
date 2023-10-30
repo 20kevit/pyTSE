@@ -93,7 +93,7 @@ def instrument_info(insCode: int | str):
         "flow_title": data["flowTitle"],
         "sector_code": int(data["sector"]["cSecVal"]),
         "sector_name": data["sector"]["lSecVal"],
-        "EPS": data["eps"]["epsValue"] or data["eps"]["estimatedEPS"],
+        "EPS": int(data["eps"]["epsValue"] or data["eps"]["estimatedEPS"]),
         "sector_pe": data["eps"]["sectorPE"],
         "PSR": data["eps"]["psr"],
         "free_float": data["kAjCapValCpsIdx"],
