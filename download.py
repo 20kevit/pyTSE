@@ -91,7 +91,7 @@ def instrument_info(insCode: int | str):
         "base_vloume": data["baseVol"],
         "flow_code": data["flow"],
         "flow_title": data["flowTitle"],
-        "ُsector_code": int(data["sector"]["cSecVal"]),
+        "sector_code": int(data["sector"]["cSecVal"]),
         "sector_name": data["sector"]["lSecVal"],
         "EPS": data["eps"]["epsValue"] or data["eps"]["estimatedEPS"],
         "sector_pe": data["eps"]["sectorPE"],
