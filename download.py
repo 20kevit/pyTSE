@@ -161,6 +161,7 @@ def _supervisor_message(url):
         inplace=True
     )
     data["date"] = data["date"].apply(dEven_to_date)
+    data["time"] = data["time"].apply(hEven_to_time)
     data.set_index("id", inplace=True)
     return data
 
@@ -210,6 +211,7 @@ def instrument_state_changes(insCode=None, n=10):
         inplace=True
     )
     data["date"] = data["date"].apply(dEven_to_date)
+    data["time"] = data["time"].apply(hEven_to_time)
     return data
 
 
@@ -222,8 +224,8 @@ def closing_price_info(insCode: int | str):
     return {
         "status": data["instrumentState"]["cEtaval"],
         "status_title": data["instrumentState"]["cEtavalTitle"],
-        "last_update_time": data["lastHEven"],
-        "last_update_date": data["finalLastDate"],
+        "last_update_time": hEven_to_time(data["lastHEven"]),
+        "last_update_date": dEven_to_date(data["finalLastDate"]),
         "low": int(data["priceMin"]),
         "high": int(data["priceMax"]),
         "close": int(data["pClosing"]),
@@ -322,6 +324,7 @@ def trades(insCode: int | str):
     )
     data["price"] = data["price"].astype(int)
     data["canceled"] = data["canceled"].astype(bool)
+    data["time"] = data["time"].apply(hEven_to_time)
     return data
 
 
