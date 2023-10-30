@@ -335,7 +335,7 @@ GET_TRADE = "http://cdn.tsetmc.com/api/Trade/GetTrade/{insCode}"
 }
 """
 
-GET_RELATED_COMPANY_LAST_30_DAYS = "http://cdn.tsetmc.com/api/ClosingPrice/GetRelatedCompany/{group_code}"
+GET_RELATED_COMPANY = "http://cdn.tsetmc.com/api/ClosingPrice/GetRelatedCompany/{group_code}"
 """Response would be like:
 {
     "relatedCompany": [
