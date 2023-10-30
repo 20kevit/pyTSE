@@ -374,4 +374,11 @@ def statistics(insCode: int | str):
     )
     data.set_index("code", inplace=True)
     return data
-    
+
+
+def introduction(symbol: str):
+    url = URLs.GET_CODAL_PUBLISHER_BY_SYMBOL.format(symbol=symbol)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    return response.json()["codalPublisher"]
