@@ -315,3 +315,23 @@ def trades(insCode: int | str):
     data["price"] = data["price"].astype(int)
     data["canceled"] = data["canceled"].astype(bool)
     return data
+
+
+def related_company(group_code: int | str):
+    url = URLs.GET_RELATED_COMPANY.format(group_code=group_code)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    related_company = response.json()["relatedCompany"]
+    result = list()
+    for company in related_company:
+        result.append(
+            {
+                "insCode": company["instrument"]["insCode"],
+                "name": company["instrument"]["lVal30"],
+                "symbol": company["instrument"]["lVal18AFC"],
+            }
+        )
+    data = pd.DataFrame(result)
+    return data
+
