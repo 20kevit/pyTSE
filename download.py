@@ -200,12 +200,16 @@ def instrument_state_changes(insCode=None, n=10):
         },
         inplace=True
     )
+    drop_list = ["realHeven", "underSupervision"]
+    if insCode:
+        drop_list += ["insCode", "symbol", "name", "id"]
+    else:
+        data.set_index("id", inplace=True)
     data.drop(
-        columns=["realHeven", "underSupervision"],
+        columns=drop_list,
         inplace=True
     )
     data["date"] = data["date"].apply(dEven_to_date)
-    data.set_index("id", inplace=True)
     return data
 
 
