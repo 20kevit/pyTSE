@@ -335,3 +335,43 @@ def related_company(group_code: int | str):
     data = pd.DataFrame(result)
     return data
 
+
+def statistics(insCode: int | str):
+    url = URLs.GET_INSTRUMENT_STATISTICS.format(insCode=insCode)
+    response = get(url)
+    if response.status_code != 200:
+        return None
+    data = response.json()["instrumentStatistic"]
+    data = pd.DataFrame(data)
+    data.drop(
+        columns=["insCode", "dEven"],
+        inplace=True
+    )
+    data.rename(
+        columns={
+            "dataType": "code",
+            "dataValue": "value",
+            "dataTypeDesc": "description",
+            "partitionCode": "type"
+        },
+        inplace=True
+    )
+    data.type.replace(
+        {
+            1: "negative_days",
+            2: "positive_days",
+            3: "no_trade_days",
+            4: "number_of_transactions",
+            5: "value_of_transactions",
+            6: "value_of_company",
+            7: "volume_of_transactions",
+            8: "closing_price",
+            9: "open_or_close_days",
+            10: "number_of_sellers_or_buyers",
+            11: "client_type"
+        },
+        inplace=True
+    )
+    data.set_index("code", inplace=True)
+    return data
+    
