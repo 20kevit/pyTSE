@@ -84,7 +84,7 @@ def instrument_info(insCode: int | str):
         ),
         "month_average_volume": data["qTotTran5JAvg"],
         "symbol": data["lVal18AFC"],
-        "persian_name": data["lVal30"],
+        "persian_name": data["lVal30"].replace("\u200c", " "),
         "english_name": data["lVal18"],
         "instrument_id": data["instrumentID"],
         "ISIN": data["cIsin"],
