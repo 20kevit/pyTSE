@@ -10,7 +10,7 @@ def dEven_to_date(dEven: int | str):
 
 
 def hEven_to_time(hEven: int | str):
-    hEven = str(hEven)
+    hEven = str(hEven).zfill(6)
     hour = int(hEven[:2])
     minute = int(hEven[2:-2])
     second = int(hEven[-2:])
