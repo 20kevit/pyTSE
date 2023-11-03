@@ -13,12 +13,12 @@ def get(url):
     )
 
 
-def search(search_key: str) -> list:
+def search(search_key: str) -> pd.DataFrame:
     """first item is the best match"""
     url = URLs.SEARCH.format(key=search_key)
     response = get(url)
     if not response.text:
-        return list()
+        return pd.DataFrame()
     results = response.text.split(";")[:-1]
     data = pd.DataFrame([result.split(',')[:3] for result in results])
     data.columns = ["symbol", "name", "insCode"]
