@@ -107,4 +107,12 @@ class Ticker:
     def update_introduction(self):
         data = introduction(self.symbol)
         self.introduction = data
-        
+
+
+def find_ticker_by_name(name):
+    result = search(name)
+    if result.empty:
+        return None
+    best_match = result.iloc[0]
+    insCode = int(best_match["insCode"])
+    return Ticker(insCode)
