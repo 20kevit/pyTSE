@@ -2,6 +2,7 @@ from datetime import date, time
 
 
 def dEven_to_date(dEven: int | str):
+    print(dEven)
     dEven = str(dEven)
     year = int(dEven[:4])
     month = int(dEven[4:-2])
