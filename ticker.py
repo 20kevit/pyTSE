@@ -19,7 +19,6 @@ class Ticker:
 
 
     def update_instrument_info(self):
-        print("hello")
         data = instrument_info(self.insCode)
         self.date = data["date"]
         self.down_limit = data["daily_threshold"][0]
